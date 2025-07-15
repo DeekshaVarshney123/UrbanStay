@@ -64,7 +64,7 @@ nodemon app.js
 Open the website
 Go to your browser and navigate to:
 
-http://localhost:3000
+http://localhost:8080
 
 📷 Screenshots
 
