@@ -1,8 +1,15 @@
+if(process.env.NODE_ENV!="production"){
+    require('dotenv').config();
+}
+
 const express=require("express");
 const mongoose=require("mongoose");
 const methodOverride=require("method-override");
 const path=require("path");
 const expressSession=require("express-session");
+const MongoStore = require('connect-mongo');
+
+
 const passport=require("passport");
 const LocalStrategy=require("passport-local");
 const User=require("./models/user.js");
@@ -17,17 +24,35 @@ app.use(methodOverride("_method"));
 const ejsMate=require("ejs-mate");
 app.engine('ejs', ejsMate);
 app.use(express.static(path.join(__dirname,"/public")));
+
+
+let dbUrl=process.env.ATLASDB_URL;
 let MONGO_URL="mongodb+srv://varshneydeeksha71:munmun@cluster0.4qjgo.mongodb.net/wondolust?retryWrites=true&w=majority&appName=Cluster0";
 async function main(){
-       await mongoose.connect(MONGO_URL)
+       await mongoose.connect(dbUrl);
        
 }
 main()
 .then(() => console.log('Connected! to db'))
 .catch((err)=>console.log(err));
 
+const store= MongoStore.create({
+    mongoUrl:dbUrl,
+    crypto: {
+    secret: process.env.SECRET,
+  },
+  touchAfter:24*3600,
+});
+
+
+//if error occured at the time of seesion store
+store.on("error",()=>{
+    console.log("ERROR in MONGO STORE",err);
+});
+
 const sessionOptions={
-    secret:"mysupersecretcode",
+    store,
+    secret:process.env.SECRET,
     resave:false,
     saveUninitialized:true,
     cookie:{
@@ -36,6 +61,9 @@ const sessionOptions={
         httpOnly:true,
     },
 }
+
+
+
 
 app.use(expressSession(sessionOptions));
 app.use(flash());
