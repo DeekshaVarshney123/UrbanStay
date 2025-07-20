@@ -27,7 +27,9 @@ Database: MongoDB
 
 Authentication: Passport.js
 
-📌 How to Run the Project Locally
+ 1. Live Demo Link-https://urbanstay-mquq.onrender.com
+ 
+ 2.  How to Run the Project Locally
 
 To view and test the UrbanStay project locally on your system:
 
@@ -41,45 +43,19 @@ Git (for cloning the repository)
 
 Steps:
 
-Clone the repository
+Clone the repository - git clone https://github.com/your-username/urbanstay.git
 
-git clone https://github.com/your-username/urbanstay.git
+Navigate to the project directory - cd urbanstay
 
-Navigate to the project directory
+Install dependencies - npm install
 
-cd urbanstay
+Configure environment variables - Create a .env file and add your MongoDB URI and session secrets
 
-Install dependencies
-
-npm install
-
-Configure environment variables
-
-Create a .env file and add your MongoDB URI and session secrets
-
-Start the server using nodemon
-
-nodemon app.js
+Start the server using nodemon - nodemon app.js or node app.js
 
 Open the website
-Go to your browser and navigate to:
+Go to your browser and navigate to: - http://localhost:8080
 
-http://localhost:8080
-
-📷 Screenshots
-
-(Add screenshots of your homepage, listing page, and review section here to visualize the project)
-
-📙 Folder Structure
-
-urbanstay/
-├── models/            # MongoDB models (User, Property, Review)
-├── routes/            # Route files
-├── views/             # EJS Templates
-├── public/            # CSS, JS, and static assets
-├── app.js             # Entry point of the application
-├── .env               # Environment variables
-└── README.md
 
 📚 License
 
